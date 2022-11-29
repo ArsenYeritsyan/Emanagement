@@ -22,7 +22,6 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class JwtProvider {
-
     private static final String BEARER_PREFIX = "Bearer ";
     private static final String KEY = "securesecuresecuresecuresecuresecuresecures";
     private static final String AUTHORITIES = "authorities";

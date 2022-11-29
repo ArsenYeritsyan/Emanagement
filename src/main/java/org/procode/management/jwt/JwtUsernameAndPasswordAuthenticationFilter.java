@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -21,13 +20,11 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
  * @author arsen
  */
 @Slf4j
-@AllArgsConstructor
 @RequiredArgsConstructor
 public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     private static final String BEARER_PREFIX = "Bearer ";
     private final AuthenticationManager authenticationManager;
     private final JwtProvider jwtProvider;
-
     private final ObjectMapper objectMapper;
 
     @Override
