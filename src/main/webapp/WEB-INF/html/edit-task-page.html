@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://thymeleaf.org"
+      xmlns:sec="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit task</title>
+</head>
+<body>
+<form th:method="PATCH" th:action="@{/tasks/{id}/edit(id=${task.getId()})}">
+    <table border="1">
+        <col width="250">
+        <col width="250">
+        <col width="500">
+        <tr>
+            <td align="right" colspan="3"><a th:href="@{/logout}">> logout <</a></td>
+        </tr>
+        <tr>
+            <td align="center" colspan="3">
+                <a th:href="@{/employee}">My profile</a>
+                <div sec:authorize access="hasAnyRole('ADMIN', 'TEAMLEAD')">
+                    |
+                    <a th:href="@{/register}">Add user</a>
+                    |
+                    <a th:href="@{/employees}">User list</a>
+                    |
+                    <a th:href="@{/tasks}">All tasks</a>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td align="center" colspan="3">Add a new task</td>
+        </tr>
+        <tr>
+            <td><label for="head">Task name: </label></td>
+            <td>
+                <input style='width:250px' type="text" th:field="${task.head}" id="head"/>
+                <div style="color:red; font-size: small" th:if="${#fields.hasErrors('task.head')}" th:errors="*{task.head}">Task name errors</div>
+            </td>
+        </tr>
+        <tr>
+            <td valign="top"><label for="body">Description: </label></td>
+            <td colspan="2">
+                <textarea style='width:750px; height:100px' type="text" th:field="${task.body}" id="body"/>
+                <div style="color:red; font-size: small" th:if="${#fields.hasErrors('task.body')}" th:errors="*{task.body}">Task body errors</div>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="priority">Priority: </label></td>
+            <td>
+                <select style='width:250px' name="task_priority"  th:field="${task.priority}" id="priority" required="required">
+                    <option value="High">High</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Low">Low</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="status">Status: </label></td>
+            <td>
+                <select style='width:250px' name="task_status" data-type="text" th:field="${task.status}" id="status">
+                    <option value="New Request">New Request</option>
+                    <option value="In Progress">In Progress</option>
+                    <option value="Confirmation Needed">Confirmation Needed</option>
+                    <option value="Complete">Complete</option>
+                    <option value="Canceled">Canceled</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><input style='width:250px' type="submit" value="> Edit <"/></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>New user</title>
+</head>
+<body>
+<form th:method="POST" th:action="@{/register}">
+    <table border="1">
+        <col width="250">
+        <col width="250">
+        <col width="500">
+        <tr>
+            <td align="right" colspan="4"><a th:href="@{/logout}">> logout <</a></td>
+        </tr>
+        <tr>
+            <td align="center" colspan="3">
+                <a th:href="@{/employee}">My profile</a>
+                |
+                <a th:href="@{/employees}">User list</a>
+                |
+                <a th:href="@{/tasks}">All tasks</a>
+            </td>
+        </tr>
+        <tr>
+            <td align="center" colspan="3">Add new user</td>
+        </tr>
+        <tr>
+            <td><label for="username">User login: </label></td>
+            <td>
+                <input style='width:250px' type="text" th:field="${user.username}" id="username"/>
+                <div style="color:red; font-size: small" th:if="${#fields.hasErrors('user.username')}" th:errors="*{user.username}">User login errors</div>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="password">Password: </label></td>
+            <td>
+                <input style='width:250px' type="text" th:field="${user.password}" id="password"/>
+                <div style="color:red; font-size: small" th:if="${#fields.hasErrors('user.password')}" th:errors="*{user.password}">User password errors</div>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="passwordConfirmation">Password again: </label></td>
+            <td>
+                <input style='width:250px' type="text" th:field="${user.passwordConfirmation}" id="passwordConfirmation"/>
+                <div style="color:red; font-size: small" th:if="${#fields.hasErrors('user.passwordConfirmation')}" th:errors="*{user.passwordConfirmation}">User password errors</div>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="firstname">Name: </label></td>
+            <td>
+                <input style='width:250px' type="text" th:field="${employee.firstname}" id="firstname"/>
+                <div style="color:red; font-size: small" th:if="${#fields.hasErrors('employee.firstname')}" th:errors="*{employee.firstname}">User password errors</div>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="surname">Surname: </label></td>
+            <td>
+                <input style='width:250px' type="text" th:field="${employee.surname}" id="surname"/>
+                <div style="color:red; font-size: small" th:if="${#fields.hasErrors('employee.surname')}" th:errors="*{employee.surname}">User password errors</div>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="department">Department: </label></td>
+            <td>
+                <input style='width:250px' type="text" th:field="${employee.department}" id="department"/>
+                <div style="color:red; font-size: small" th:if="${#fields.hasErrors('employee.department')}" th:errors="*{employee.department}">User password errors</div>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="position">Position: </label></td>
+            <td>
+                <input style='width:250px' type="text" th:field="${employee.position}" id="position"/>
+                <div style="color:red; font-size: small" th:if="${#fields.hasErrors('employee.position')}" th:errors="*{employee.position}">User password errors</div>
+            </td>
+        </tr>
+        <tr>
+            <td><input style='width:250px' type="submit" value="> Add <"/></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

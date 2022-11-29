@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://thymeleaf.org"
+      xmlns:sec="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table border="1">
+    <col width="150">
+    <col width="100">
+    <col width="390">
+    <col width="100">
+    <col width="100">
+    <col width="80">
+    <col width="80">
+    <tr>
+        <td align="right" colspan="7"><a th:href="@{/logout}">> logout <</a></td>
+    </tr>
+    <tr>
+        <td align="center" colspan="7">
+            <a th:href="@{/employee}">My profile</a>
+            <div sec:authorize access="hasAnyRole('ADMIN', 'TEAMLEAD')">
+                |
+                <a th:href="@{/register}">Add user</a>
+                |
+                <a th:href="@{/employees}">User list</a>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th>Executor</th>
+        <th>Task name</th>
+        <th>Description</th>
+        <th>Priority</th>
+        <th>Status</th>
+    </tr>
+    <tr th:each="item : ${allTasks}">
+        <td th:text="${item.employee.surname} + ' ' + ${#strings.substring(item.employee.firstname,0,1)} + '. ' + ${#strings.substring(item.employee.middlename,0,1)} + '.'"/>
+        <td th:text="${item.head}"/>
+        <td th:text="${item.body}"/>
+        <td align="center" th:text="${item.priority}"/>
+        <td align="center" th:text="${item.status}"/>
+        <td>
+            <form th:method="GET" th:action="@{/tasks/{id}/edit(id=${item.getId()})}">
+                <input style='width:80px' type="submit" value="> edit <"/>
+            </form>
+        </td>
+        <td>
+            <form th:method="DELETE" th:action="@{/tasks/{id}(id=${item.getId()})}">
+                <input style='width:80px' type="submit" value="> delete <"/>
+            </form>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
